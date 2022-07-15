@@ -14,7 +14,7 @@ def _get_github_stargazers(repo, client_id, client_secret, page=1):
 
     to_return = []
     response = resp.json()
-    if len(response) < 100 or page > 2:
+    if len(response) < 100:
         return response
     
     print("Fetch the next page", page)
