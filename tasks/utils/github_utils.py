@@ -8,7 +8,6 @@ def _get_github_stargazers(repo, client_id, client_secret, page=1):
     )
     resp = requests.get(url, auth=(client_id, client_secret))
     if resp.status_code != 200:
-        import pdb; pdb.set_trace()
         print("! Failed on page {} for repo {}".format(page, repo))
         return []
 

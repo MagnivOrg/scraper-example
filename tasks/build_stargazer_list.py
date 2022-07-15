@@ -20,7 +20,7 @@ def update_stargazers_for_repo():
 	# Get stargazers from store
 	r = store.Client()
 	stargazers = r.get('stargazers') or []
-	users_processed = {u.login for u in stargazers}
+	users_processed = {u["login"] for u in stargazers}
 
 	for user in feteched_stars:
 		if user["login"] in users_processed:
