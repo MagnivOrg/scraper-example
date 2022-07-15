@@ -1,1 +1,1 @@
-psf/requests
+Kaggle/kaggle-api

@@ -10,6 +10,12 @@ def calculate_influencers():
 	r = store.Client()
 	stargazers = r.get('stargazers')
 
+	# Only calculate influencers when >=75% users have been queried
+	processed_user_count = sum(1.0 for u in stargazers if u.get("follower_count"))
+	if processed_user_count / len(stargazers) < .75:
+		print(f'Only processed: {processed_user_count / len(stargazers) // .01 / 100}%')
+		return
+
 	# Sort based on follower_count
 	stargazers = sorted(stargazers, key=lambda x: x.get("follower_count", -1))[::-1]
 	top_ten = stargazers[:10]
