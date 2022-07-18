@@ -4,7 +4,7 @@ from utils.github_utils import _get_follower_count
 import utils.redis_utils as store
 import os
 
-@task(schedule="0 */2 * * *", description="Update follower count for each stargazer")
+@task(schedule="0 */3 * * *", description="Update follower count for each stargazer")
 def update_followers():
 	# Get stargazers from store
 	r = store.Client()
@@ -21,7 +21,7 @@ def update_followers():
 			os.environ.get("GITHUB_CLIENT_ID"), 
 			os.environ.get("GITHUB_CLIENT_SECRET"))
 
-		if follower_count:
+		if follower_count is not None:
 			print(f'  User {idx} has {follower_count} followers')
 			stargazers[idx]["follower_count"] = int(follower_count)
 			stargazers[idx]["last_updated"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
