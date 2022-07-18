@@ -44,4 +44,5 @@ def _get_follower_count(login, client_id, client_secret):
         return None
 
     response = resp.json()
+    print(resp.status_code, response)
     return response.get("followers", None)
