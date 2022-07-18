@@ -20,6 +20,7 @@ def update_stargazers_for_repo():
 	# Get stargazers from store
 	r = store.Client()
 	stargazers = r.get('stargazers') or []
+	original_len = len(stargazers)
 	users_processed = {u["login"] for u in stargazers}
 
 	for user in feteched_stars:
@@ -35,6 +36,7 @@ def update_stargazers_for_repo():
 		users_processed.add(user["login"])	
 	
 	# Update stargazers in store
+	print(f'Adding {len(stargazers) - original_len} stargazers')
 	r.set('stargazers', stargazers)
 
 if __name__ == '__main__':
