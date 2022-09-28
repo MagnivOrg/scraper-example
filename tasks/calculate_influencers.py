@@ -4,7 +4,7 @@ import utils.redis_utils as store
 import requests
 import os
 
-@task(schedule="@daily", description="Calculate top 10 influencers")
+@task(schedule="@daily", description="Calculate top 10 influencers", webhook_trigger=True)
 def calculate_influencers():
 	# Get stargazers from store
 	r = store.Client()
