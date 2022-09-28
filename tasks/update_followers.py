@@ -4,7 +4,7 @@ from utils.github_utils import _get_follower_count
 import utils.redis_utils as store
 import os
 
-@task(schedule="@daily", description="Update follower count for each stargazer")
+@task(schedule="@daily", description="Update follower count for each stargazer", on_success=["calculate_influencers"])
 def update_followers():
 	# Get stargazers from store
 	r = store.Client()
